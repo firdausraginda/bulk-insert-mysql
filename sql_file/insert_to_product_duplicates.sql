@@ -1,4 +1,4 @@
-INSERT INTO public.product_duplicates_dummy (title, created_at, updated_at)
+INSERT INTO public.product_duplicates (title, created_at, updated_at)
 WITH
 	duplicate_products AS (
 		SELECT 

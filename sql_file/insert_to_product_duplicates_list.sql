@@ -1,4 +1,4 @@
-INSERT INTO public.product_duplicate_lists_dummy (product_duplicate_id, external_id, product_id, deleted_at, created_at, updated_at)
+INSERT INTO public.product_duplicate_lists (product_duplicate_id, external_id, product_id, deleted_at, created_at, updated_at)
 WITH
 	duplicate_products AS (
 		SELECT 
@@ -38,6 +38,6 @@ SELECT
     dpi.created_at,
     dpi.updated_at
 FROM duplicate_products_info dpi
-LEFT JOIN public.product_duplicates_dummy pd ON
+LEFT JOIN public.product_duplicates pd ON
     dpi.title = pd.title
 ;
