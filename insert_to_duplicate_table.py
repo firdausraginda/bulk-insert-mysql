@@ -21,7 +21,13 @@ for file in os.listdir(set_path_to_sql_file()):
     try:
         complete_path_to_sql_file = set_path_to_sql_file(file)
         query_insert = open(complete_path_to_sql_file).read()
+
+        table_name = file.split(".")[1]
+        db_cursor.execute(f"LOCK TABLES `{table_name}` WRITE;")
+        db_cursor.execute(f"/*!40000 ALTER TABLE `{table_name}` DISABLE KEYS */;")
         db_cursor.execute(query_insert)
+        db_cursor.execute(f"/*!40000 ALTER TABLE `{table_name}` ENABLE KEYS */;")
+        db_cursor.execute("UNLOCK TABLES;")
     except Exception as e:
         raise e
     else:
