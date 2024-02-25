@@ -1,4 +1,5 @@
 import mysql.connector
+import pandas as pd
 
 
 db_conn = mysql.connector.Connect(
@@ -7,8 +8,6 @@ db_conn = mysql.connector.Connect(
    port='3307', 
    password="dbeaver",
    database="public")
-
-db_cursor = db_conn.cursor()
 
 query = """
 SELECT
@@ -21,12 +20,5 @@ SELECT
 	GROUP BY 1,3;
 """
 
-try:
-    db_cursor.execute(query)
-    query_result = db_cursor.fetchall()
-    for item in query_result:
-        print(item)
-except Exception as e:
-    raise e
-
-db_conn.close()
+df = pd.read_sql(query, db_conn)
+print(df.head())
